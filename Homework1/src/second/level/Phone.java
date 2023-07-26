@@ -26,9 +26,10 @@ public class Phone {
 		}
 		numbers[i] = n;
 	}
-	public void outgoingCall(Phone p) { // вихідний дзвінок
+	
+	public void outgoingCall(String number) { // вихідний дзвінок
 		String s1 = this.number.substring(0, 3); // перші 3 символи цього номеу
-		String s2 = p.getNumber().substring(0, 3); // перші 3 символи номеру, на який здійснюється дзвінок
+		String s2 = number.substring(0, 3); // перші 3 символи номеру, на який здійснюється дзвінок
 		if(!s1.equals("+38")) {
 			System.out.println("Your number isn't registered");
 		}
@@ -39,7 +40,8 @@ public class Phone {
 			System.out.println("Your call is successful");
 		}
 	}
-	public void inletCall(Phone p) { // вхідний дзвінок
-		System.out.println("Number " + p.getNumber() + " is calling you");
+	
+	public void inletCall(String number) { // вхідний дзвінок
+		System.out.println("Number " + number + " is calling you");
 	}
 }
