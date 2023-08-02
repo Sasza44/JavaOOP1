@@ -38,6 +38,9 @@ public class Phone {
 		}
 		if(s1.equals("+38") && s2.equals("+38")) {
 			System.out.println("Your call is successful");
+			Phone ph = new Phone();
+			ph.setNumber(number);
+			ph.inletCall(this.number);
 		}
 	}
 	
