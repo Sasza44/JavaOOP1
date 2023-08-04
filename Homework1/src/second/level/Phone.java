@@ -18,7 +18,7 @@ public class Phone {
 	}
 
 	public void register(Network[] numbers) { // реєстрація номеру телефону в мережі
-		this.number = "+38-" + this.number;
+		this.number = "8-" + this.number;
 		Network n = new Network(this.number);
 		int i = 0;
 		while(numbers[i] != null) {
@@ -28,19 +28,15 @@ public class Phone {
 	}
 	
 	public void outgoingCall(String number) { // вихідний дзвінок
-		String s1 = this.number.substring(0, 3); // перші 3 символи цього номеу
-		String s2 = number.substring(0, 3); // перші 3 символи номеру, на який здійснюється дзвінок
-		if(!s1.equals("+38")) {
+		if(this.number.indexOf("8-") != 0) {
 			System.out.println("Your number isn't registered");
 		}
-		if(!s2.equals("+38")) {
+		if(number.indexOf("8-") != 0) {
 			System.out.println("Subscriber's number isn't registered");
 		}
-		if(s1.equals("+38") && s2.equals("+38")) {
+		if(this.number.indexOf("8-") == 0 && number.indexOf("8-") == 0) {
 			System.out.println("Your call is successful");
-			Phone ph = new Phone();
-			ph.setNumber(number);
-			ph.inletCall(this.number);
+			inletCall(this.number);
 		}
 	}
 	
