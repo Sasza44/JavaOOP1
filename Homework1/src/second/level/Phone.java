@@ -2,6 +2,7 @@ package second.level;
 
 public class Phone {
 	private String number;
+	private boolean isRegistered = false;
 
 	public Phone() {}
 	public Phone(String number) {
@@ -16,27 +17,22 @@ public class Phone {
 	public String toString() {
 		return "Phone [number=" + number + "]";
 	}
-
-	public void register(Network[] numbers) { // реєстрація номеру телефону в мережі
-		this.number = "8-" + this.number;
-		Network n = new Network(this.number);
-		int i = 0;
-		while(numbers[i] != null) {
-			i += 1;
-		}
-		numbers[i] = n;
+	
+	public void register() {  // реєстрація номеру телефону в мережі
+		Network.addNumber(this);
+		this.isRegistered = true;
 	}
 	
 	public void outgoingCall(String number) { // вихідний дзвінок
-		if(this.number.indexOf("8-") != 0) {
-			System.out.println("Your number isn't registered");
+		if(this.isRegistered == false) {
+			System.out.println("Your number isn't registered in the network");
 		}
-		if(number.indexOf("8-") != 0) {
-			System.out.println("Subscriber's number isn't registered");
+		if(Network.searchPhone(number) == null) {
+			System.out.println("The subscriber's number isn't registered");
 		}
-		if(this.number.indexOf("8-") == 0 && number.indexOf("8-") == 0) {
+		if(this.isRegistered == true && Network.searchPhone(number) != null) {
 			System.out.println("Your call is successful");
-			inletCall(this.number);
+			Network.searchPhone(number).inletCall(this.number);
 		}
 	}
 	
