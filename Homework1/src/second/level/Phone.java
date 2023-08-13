@@ -3,6 +3,7 @@ package second.level;
 public class Phone {
 	private String number;
 	private boolean isRegistered = false;
+	private Network net;
 
 	public Phone() {}
 	public Phone(String number) {
@@ -18,21 +19,24 @@ public class Phone {
 		return "Phone [number=" + number + "]";
 	}
 	
-	public void register() {  // реєстрація номеру телефону в мережі
-		Network.addNumber(this);
+	public void register(Network net) {  // реєстрація номеру телефону в мережі
+		this.net = net;
+		net.addNumber(this);
 		this.isRegistered = true;
 	}
 	
 	public void outgoingCall(String number) { // вихідний дзвінок
 		if(this.isRegistered == false) {
 			System.out.println("Your number isn't registered in the network");
+			return;
 		}
-		if(Network.searchPhone(number) == null) {
+		if(this.net.searchPhone(number) == null) {
 			System.out.println("The subscriber's number isn't registered");
+			return;
 		}
-		if(this.isRegistered == true && Network.searchPhone(number) != null) {
+		if(this.isRegistered == true && this.net.searchPhone(number) != null) {
 			System.out.println("Your call is successful");
-			Network.searchPhone(number).inletCall(this.number);
+			this.net.searchPhone(number).inletCall(this.number);
 		}
 	}
 	

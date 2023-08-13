@@ -2,24 +2,29 @@ package second.level;
 
 public class Network {
 	
-	private static Phone[] phones = new Phone[10]; // масив зареєстрованих номерів (з запасом)
+	private Phone[] phones; // масив зареєстрованих номерів (з запасом)
 	
-	public static void addNumber(Phone phone) {
+	public Network(Phone[] phones) {
+		super();
+		this.phones = phones;
+	}
+
+	public void addNumber(Phone phone) {
 		int i = 0;
-		while(phones[i] != null) {
+		while(this.phones[i] != null) {
 			i += 1;
 		}
-		phones[i] = phone;
+		this.phones[i] = phone;
 	}
 	
-	public static Phone searchPhone(String number) {
+	public Phone searchPhone(String number) {
 		int i = 0;
-		while(phones[i] != null) {
-			if(phones[i].getNumber().equals(number)) {
-				return phones[i];
+		while(this.phones[i] != null) {
+			if(this.phones[i].getNumber().equals(number)) {
+				return this.phones[i];
 			}
 			i += 1;
 		}
-		return phones[9];
+		return this.phones[9];
 	}
 }
